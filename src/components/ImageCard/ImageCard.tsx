@@ -1,6 +1,18 @@
+import { FC } from 'react';
+import { Image } from '../../commonTypes';
 import css from './ImageCard.module.css';
 
-export default function ImageCard({ onImageClick, image }) {
+interface ImageCard {
+  onImageClick: (
+    imageUrl: string,
+    ariaLabel: string,
+    author: string,
+    likes: number
+  ) => void;
+  image: Image;
+}
+
+const ImageCard: FC<ImageCard> = ({ onImageClick, image }) => {
   return (
     <div>
       <img
@@ -18,4 +30,6 @@ export default function ImageCard({ onImageClick, image }) {
       />
     </div>
   );
-}
+};
+
+export default ImageCard;

@@ -1,38 +1,44 @@
 import { useEffect, useState } from 'react';
-import { fetchImages } from '../../images-api.js';
+import { fetchImages } from '../../images-api';
 import toast, { Toaster } from 'react-hot-toast';
 import SearchBar from '../SearchBar/SearchBar';
-import ImageGallery from '../ImageGallery/ImageGallery.jsx';
-import ImageModal from '../ImageModal/ImageModal.jsx';
-import LoadMoreBtn from '../LoadMoreBtn/LoadMoreBtn.jsx';
-import Loader from '../Loader/Loader.jsx';
-import ErrorMessage from '../ErrorMessage/ErrorMessage.jsx';
+import ImageGallery from '../ImageGallery/ImageGallery';
+import ImageModal from '../ImageModal/ImageModal';
+import LoadMoreBtn from '../LoadMoreBtn/LoadMoreBtn';
+import Loader from '../Loader/Loader';
+import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import css from './App.module.css';
+import { Image } from '../../commonTypes';
 
 export default function App() {
-  const [images, setImages] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(false);
-  const [page, setPage] = useState(1);
-  const [query, setQuery] = useState('');
-  const [showBtn, setShowBtn] = useState(false);
-  const [selectedImageUrl, setSelectedImageUrl] = useState('');
-  const [selectedAriaLabel, setSelectedAriaLabel] = useState('');
-  const [isImageModalOpen, setIsImageModalOpen] = useState(false);
-  const [selectedAuthor, setSelectedAuthor] = useState('');
-  const [likes, setLikes] = useState('');
+  const [images, setImages] = useState<Image[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [error, setError] = useState<boolean>(false);
+  const [page, setPage] = useState<number>(1);
+  const [query, setQuery] = useState<string>('');
+  const [showBtn, setShowBtn] = useState<boolean>(false);
+  const [selectedImageUrl, setSelectedImageUrl] = useState<string>('');
+  const [selectedAriaLabel, setSelectedAriaLabel] = useState<string>('');
+  const [isImageModalOpen, setIsImageModalOpen] = useState<boolean>(false);
+  const [selectedAuthor, setSelectedAuthor] = useState<string>('');
+  const [likes, setLikes] = useState<number>(0);
 
-  const handleSubmit = newImage => {
+  const handleSubmit = (newImage: string): void => {
     setQuery(newImage);
     setPage(1);
     setImages([]);
   };
 
-  const handleLoadMore = () => {
+  const handleLoadMore = (): void => {
     setPage(page + 1);
   };
 
-  const handleImageClick = (imageUrl, ariaLabel, author, likes) => {
+  const handleImageClick = (
+    imageUrl: string,
+    ariaLabel: string,
+    author: string,
+    likes: number
+  ): void => {
     setSelectedImageUrl(imageUrl);
     setSelectedAriaLabel(ariaLabel);
     setSelectedAuthor(author);
@@ -40,7 +46,7 @@ export default function App() {
     setIsImageModalOpen(true);
   };
 
-  const closeModal = () => {
+  const closeModal = (): void => {
     setIsImageModalOpen(false);
   };
 

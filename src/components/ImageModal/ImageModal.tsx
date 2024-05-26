@@ -1,7 +1,30 @@
 import Modal from 'react-modal';
 import css from './ImageModal.module.css';
+import { FC } from 'react';
 
-const customStyles = {
+interface Styles {
+  content: {
+    width: string;
+    margin: string;
+    color: string;
+    border: string;
+    padding: string;
+  };
+  overlay: {
+    backgroundColor: string;
+  };
+}
+
+interface ImageModalProps {
+  isOpen: boolean;
+  onRequestClose: () => void;
+  imageUrl: string;
+  ariaLabel: string;
+  author: string;
+  likes: number;
+}
+
+const customStyles: Styles = {
   content: {
     width: 'fit-content',
     margin: '0 auto',
@@ -16,7 +39,7 @@ const customStyles = {
 
 Modal.setAppElement('#root');
 
-const ImageModal = ({
+const ImageModal: FC<ImageModalProps> = ({
   isOpen,
   onRequestClose,
   imageUrl,

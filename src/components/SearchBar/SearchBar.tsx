@@ -2,8 +2,13 @@ import { Formik, Form, Field } from 'formik';
 import { IoIosSearch } from 'react-icons/io';
 import { toast } from 'react-hot-toast';
 import css from './SearchBar.module.css';
+import { FC } from 'react';
 
-export default function SearchBar({ onSubmit }) {
+interface SearchBarProps {
+  onSubmit: (newImage: string) => void;
+}
+
+const SearchBar: FC<SearchBarProps> = ({ onSubmit }) => {
   return (
     <header className={css.wrapper}>
       <Formik
@@ -36,4 +41,6 @@ export default function SearchBar({ onSubmit }) {
       </Formik>
     </header>
   );
-}
+};
+
+export default SearchBar;
